@@ -1,0 +1,22 @@
+h3 {
+  text-align: center;
+}
+
+.buttons {
+  width: 60%;
+  float: right;
+}
+
+.log-form {
+  background: rgba(196, 196, 196, 0.26);
+  border: 1px solid rgba(0, 0, 0, 0.21);
+  height: 433px;
+  margin: 0 auto;
+  padding: 62px 45px;
+  width: 541px;
+}
+
+.log-input {
+  margin-bottom: 120px;
+  caret-color: #2F80ED;
+}

@@ -37,6 +37,10 @@ class LoginForm extends Component {
         //from here should go request to DB, although I am not sure how it should be done
         //in this case, so decided not to guess, I left console.log to make testing validation easy
         console.log(this.state.email, this.state.password);
+        this.setState({
+          email: "",
+          password: ""
+        });
     }
   }
 

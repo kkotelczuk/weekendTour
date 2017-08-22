@@ -10,7 +10,9 @@ class LoginForm extends Component {
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      errorEmail: '',
+      errorPassword: '',
     };
 
     this.handleLogIn = this.handleLogIn.bind(this);
@@ -31,25 +33,24 @@ class LoginForm extends Component {
   }
 
   handleLogIn() {
+    //I am not sure if I should give here front end validation,
+    //I think in case of log in should be only backend validation
+
+    //from here should go request to DB, same case as in handleSignUp()
+    console.log(this.state.email, this.state.password);
+  }
+
+  handleSignUp() {
     const { email, password } = this.state;
 
     if (this.validate(email, password)) {
         //from here should go request to DB, although I am not sure how it should be done
-        //in this case, so decided not to guess, I left console.log to make testing validation easy
-        console.log(this.state.email, this.state.password);
+        //in this case, so decided not to guess
         this.setState({
           email: "",
           password: ""
         });
     }
-  }
-
-  handleSignUp() {
-    //I am not sure if I should give here front end validation,
-    //I think in case of sign up should be only backend validation
-
-    //from here should go request to DB, same case as in handleLogIn()
-    console.log(this.state.email, this.state.password);
   }
 
   validate(email, password) {
@@ -58,15 +59,24 @@ class LoginForm extends Component {
 
     if ( !emailRE.test(email)) {
       validate = false;
-      alert("Please write valid email");
-      //alert is just for testing, there was no info in project how to make error notification,
-      //so I left it this way :)
+      this.setState({
+        errorEmail: "Please write valid email"
+      });
+    } else {
+      this.setState({
+        errorEmail: ''
+      });
     }
 
     if ( password.length < 8 ) {
       validate = false;
-      alert("Password should have at least 8 characters");
-      //same case as in previous if
+      this.setState({
+        errorPassword: "Password should have at least 8 characters"
+      });
+    } else {
+      this.setState({
+        errorPassword: ''
+      });
     }
 
     return validate;
@@ -74,16 +84,17 @@ class LoginForm extends Component {
 
   render() {
     const buttonStyle = {
-      margin: 30,
+      margin: 20
     }
 
     const inputStyle = {
+      hight: 48,
       width: 330
     }
 
     return (
       <div>
-        <h3>Before move on please log in or sign up</h3>
+        <p>Before move on please log in or sign up</p>
         <form className="log-form">
           <TextField
             className="log-input"
@@ -93,6 +104,7 @@ class LoginForm extends Component {
             value={this.state.email}
             onChange={this.handleChange}
             hintText="Email"
+            errorText={this.state.errorEmail}
             /><br />
           <TextField
             className="log-input"
@@ -102,6 +114,7 @@ class LoginForm extends Component {
             value={this.state.password}
             onChange={this.handleChange}
             hintText="Password"
+            errorText={this.state.errorPassword}
             /><br />
             <div className="buttons">
               <RaisedButton style={buttonStyle} label="Log In" primary={true} onTouchTap={this.handleLogIn}/>

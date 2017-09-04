@@ -1,0 +1,26 @@
+p {
+  color: #676767;
+  font-family: 'Roboto', sans-serif;
+  font-size: 2.2rem;
+  text-align: center;
+}
+
+.buttons {
+  float: right;
+  width: 60%;
+}
+
+.log-form {
+  background: rgba(196, 196, 196, 0.26);
+  border: 1px solid rgba(0, 0, 0, 0.21);
+  border-radius: 5px;
+  height: 433px;
+  margin: 0 auto;
+  padding: 62px 45px;
+  width: 541px;
+}
+
+.log-input {
+  caret-color: #2F80ED;
+  margin-bottom: 80px;
+}

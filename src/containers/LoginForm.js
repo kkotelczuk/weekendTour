@@ -3,6 +3,7 @@ import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import '../style/LoginForm.css';
+import firebase from '../firebase';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -33,23 +34,35 @@ class LoginForm extends Component {
   }
 
   handleLogIn() {
+    const { email, password } = this.state;
     //I am not sure if I should give here front end validation,
     //I think in case of log in should be only backend validation
 
-    //from here should go request to DB, same case as in handleSignUp()
-    console.log(this.state.email, this.state.password);
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(() => alert("Logged in"))
+      .catch(error => {
+        console.log(error.code + ' ' + error.message);
+        alert("Wrong email or password");
+    });
+    this.setState({
+      email: "",
+      password: ""
+    });
   }
 
   handleSignUp() {
     const { email, password } = this.state;
 
     if (this.validate(email, password)) {
-        //from here should go request to DB, although I am not sure how it should be done
-        //in this case, so decided not to guess
-        this.setState({
-          email: "",
-          password: ""
-        });
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(() => alert("Thank you for signing up"))
+        .catch(error => {
+          console.log(error.code + ' ' + error.message);
+      });
+      this.setState({
+        email: "",
+        password: ""
+      });
     }
   }
 
@@ -117,8 +130,8 @@ class LoginForm extends Component {
             errorText={this.state.errorPassword}
             /><br />
             <div className="buttons">
-              <RaisedButton style={buttonStyle} label="Log In" primary={true} onTouchTap={this.handleLogIn}/>
-              <FlatButton style={buttonStyle} label="Sign Up" primary={true} onTouchTap={this.handleSignUp}/>
+              <RaisedButton style={buttonStyle} labelStyle = {{ textTransform: 'capitalize' }} label="Log In" primary={true} onTouchTap={this.handleLogIn}/>
+              <FlatButton style={buttonStyle} labelStyle = {{ textTransform: 'capitalize' }} label="Sign Up" primary={true} onTouchTap={this.handleSignUp}/>
             </div>
         </form>
       </div>

@@ -1,0 +1,13 @@
+.search {
+  float: left;
+  margin-right: 50px;
+  width: 180px;
+}
+
+.search input {
+  caret-color: #2F80ED;
+}
+
+.fa-search {
+  width: 20px;
+}

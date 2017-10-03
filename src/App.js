@@ -3,6 +3,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import LoginForm from './containers/LoginForm';
+import NavBar from './components/NavBar';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -16,6 +17,7 @@ class App extends Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
+          <NavBar />
           <LoginForm />
         </div>
       </MuiThemeProvider>

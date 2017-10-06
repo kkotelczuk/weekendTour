@@ -1,7 +1,7 @@
 .search {
   float: left;
   margin-right: 50px;
-  width: 180px;
+  transition: width .6s ease-in-out;
 }
 
 .search input {

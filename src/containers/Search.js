@@ -9,7 +9,7 @@ class Search extends Component {
 
     this.state = {
       search: '',
-      searchWidth: 150,
+      isFocused: false,
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -23,62 +23,33 @@ class Search extends Component {
   }
 
   changeWidth(e) {
-    const search = document.querySelector('.search');
-    const icon = document.querySelector('.search i');
-
-    const draw = (timePassed, expanding) => {
-      this.setState((prevState) => {
-        const direction = expanding ? prevState.searchWidth + 9 : prevState.searchWidth - 9;
-        return {
-          searchWidth: direction
-         };
-      });
-      let searchDivWidth = this.state.searchWidth + 20;
-      search.style.width = `${searchDivWidth}px`;
-    }
-
-    const animator = (expanding) => {
-      let start = Date.now();
-
-      let timer = setInterval(function() {
-        let timePassed = Date.now() - start;
-
-        if (timePassed >= 500) {
-          clearInterval(timer);
-          return;
-        }
-
-        draw(timePassed, expanding);
-      }, 25);
-    }
-
     if(e.type === "focus") {
-      const expanding = true;
-      if(this.state.searchWidth === 150) {
-        animator(expanding);
-        icon.style.color = '#2F80ED';
-      }
-
+      this.setState(() => ({ isFocused: true }));
     } else {
-      const expanding = false;
-      if(this.state.searchWidth > 250) {
-        animator(expanding);
-        icon.style.color = 'black';
-      }
+      this.setState(() => ({ isFocused: false }));
     }
   }
 
   render() {
-    //temporary console to show that search field is active
+    //temporary console to see that search field val goes to the state
     console.log(this.state.search)
 
     const inputStyle = {
-      width: this.state.searchWidth
+      width: this.state.isFocused ? '280px' : '140px',
+      transition: 'width .6s ease-in-out'
+    }
+
+    const wrapperStyle = {
+      width: this.state.isFocused ? '300px' : '160px',
+    }
+
+    const iconStyle = {
+      color: this.state.isFocused ? '#2F80ED' : 'black',
     }
 
     return (
-      <div className="search">
-        <i className="fa fa-search" aria-hidden="true"></i>
+      <div className="search" style={wrapperStyle}>
+        <i className="fa fa-search" aria-hidden="true" style={iconStyle}></i>
         <TextField
           id="search"
           value={this.state.search}

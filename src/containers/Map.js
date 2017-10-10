@@ -1,3 +1,5 @@
+/*global google*/
+
 import React, { Component } from 'react';
 import Checkbox from 'material-ui/Checkbox';
 import Slider from 'material-ui/Slider';
@@ -17,6 +19,16 @@ class Map extends Component {
 
     this.updateCheck = this.updateCheck.bind(this);
     this.handleDistanceSlider = this.handleDistanceSlider.bind(this);
+  }
+
+  componentDidMount() {
+    new google.maps.Map(this.refs.map, {
+      zoom: 12,
+      center: {
+        lat: 52.6783,
+        lng: 22.4982
+      }
+    });
   }
 
   //temporary function to test current functionalities
@@ -79,7 +91,7 @@ class Map extends Component {
             style={sliderStyle}
           />
         </div>
-        <div className="map"><img src="./images/map.png" alt="map"/></div>
+        <div className="map" ref="map"></div>
       </div>
     )
   }

@@ -14,10 +14,12 @@
 }
 
 .map {
-  height: 100vh;
+  height: calc(100vh - 70px);
+  left: 240px;
   overflow: hidden;
   position: relative;
-  width: 100%;
+  top: 70px;
+  width: calc(100% - 240px);
 }
 
 .map img {

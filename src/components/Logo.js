@@ -1,0 +1,55 @@
+import React from 'react';
+
+const Logo = () => {
+  return (
+    <div className="logo">
+      <svg width="64" height="64" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+      <title>Logo</title>
+      <desc>Created using Figma</desc>
+      <g id="Canvas" transform="translate(-781 363)">
+      <g id="Logo" filter="url(#filter0_d)">
+      <g id="Ellipse">
+      <use xlinkHref="#path0_fill" transform="translate(785 -363)" fill="#FFFFFF"/>
+      </g>
+      <g id="Icon 24px">
+      <g id="Shape">
+      <use xlinkHref="#path1_fill" transform="translate(804.411 -348.256)" fill="#2F80ED"/>
+      </g>
+      </g>
+      <g id="ic_local_see">
+      <g id="Ellipse 2">
+      <use xlinkHref="#path2_fill" transform="translate(816.652 -351.638)" fill="#F2994A"/>
+      </g>
+      <g id="Icon 24px">
+      <g id="Oval">
+      <use xlinkHref="#path3_fill" transform="translate(819.844 -348.445)" fill="#F2F2F2"/>
+      </g>
+      <g id="Shape">
+      <use xlinkHref="#path4_fill" transform="translate(818.005 -350.285)" fill="#F2F2F2"/>
+      </g>
+      </g>
+      </g>
+      </g>
+      </g>
+      <defs>
+      <filter id="filter0_d" filterUnits="userSpaceOnUse" x="781" y="-363" width="64" height="64" colorInterpolationFilters="sRGB">
+      <feFlood floodOpacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 255 0"/>
+      <feOffset dx="0" dy="4"/>
+      <feGaussianBlur stdDeviation="2"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+      </filter>
+      <path id="path0_fill" d="M 56 28C 56 43.464 43.464 56 28 56C 12.536 56 0 43.464 0 28C 0 12.536 12.536 0 28 0C 43.464 0 56 12.536 56 28Z"/>
+      <path id="path1_fill" fillRule="evenodd" d="M 8.99517 0C 4.03498 0 0 4.03498 0 8.99517C 0 15.7416 8.99517 25.7005 8.99517 25.7005C 8.99517 25.7005 17.9903 15.7416 17.9903 8.99517C 17.9903 4.03498 13.9554 0 8.99517 0L 8.99517 0ZM 14.1352 10.2801L 10.2801 10.2801L 10.2801 14.1352L 7.71005 14.1352L 7.71005 10.2801L 3.85498 10.2801L 3.85498 7.71005L 7.71005 7.71005L 7.71005 3.85498L 10.2801 3.85498L 10.2801 7.71005L 14.1352 7.71005L 14.1352 10.2801L 14.1352 10.2801Z"/>
+      <path id="path2_fill" d="M 8.11594 4.05797C 8.11594 6.29913 6.29913 8.11594 4.05797 8.11594C 1.81682 8.11594 0 6.29913 0 4.05797C 0 1.81682 1.81682 0 4.05797 0C 6.29913 0 8.11594 1.81682 8.11594 4.05797Z"/>
+      <path id="path3_fill" fillRule="evenodd" d="M 0.8657 1.7314C 1.34381 1.7314 1.7314 1.34381 1.7314 0.8657C 1.7314 0.387587 1.34381 0 0.8657 0C 0.387587 0 0 0.387587 0 0.8657C 0 1.34381 0.387587 1.7314 0.8657 1.7314Z"/>
+      <path id="path4_fill" fillRule="evenodd" d="M 1.89372 0L 1.39865 0.541063L 0.541063 0.541063C 0.243478 0.541063 0 0.784541 0 1.08213L 0 4.3285C 0 4.62609 0.243478 4.86957 0.541063 4.86957L 4.86957 4.86957C 5.16715 4.86957 5.41063 4.62609 5.41063 4.3285L 5.41063 1.08213C 5.41063 0.784541 5.16715 0.541063 4.86957 0.541063L 4.01198 0.541063L 3.51691 0L 1.89372 0L 1.89372 0ZM 2.7055 4.0577C 1.95883 4.0577 1.35284 3.45171 1.35284 2.70504C 1.35284 1.95838 1.95883 1.35239 2.7055 1.35239C 3.45217 1.35239 4.05816 1.95838 4.05816 2.70504C 4.05816 3.45171 3.45217 4.0577 2.7055 4.0577L 2.7055 4.0577Z"/>
+      </defs>
+      </svg>
+    </div>
+  );
+}
+
+export default Logo;

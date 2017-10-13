@@ -1,0 +1,42 @@
+.options-panel {
+  background-color: white;
+  font-size: 14px;
+  height: 100vh;
+  padding: 100px 40px 0 30px;
+  position: fixed;
+  width: 240px;
+  top: 70px;
+  z-index: 50;
+}
+
+.options-panel > * {
+  margin-bottom: 12px;
+}
+
+.map {
+  height: calc(100vh - 70px);
+  left: 240px;
+  overflow: hidden;
+  position: relative;
+  top: 70px;
+  width: calc(100% - 240px);
+}
+
+.map img {
+  width: 100%;
+}
+
+.distance-label {
+  color: rgba(0, 0, 0, 0.87);
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 20px;
+  margin-bottom: -15px;
+  width: 150px;
+}
+
+.distance-value {
+  color: rgb(158, 158, 158);
+  float: right;
+}

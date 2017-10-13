@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-import LoginForm from './containers/LoginForm';
+//import LoginForm from './containers/LoginForm';
+import Map from './containers/Map';
 import NavBar from './components/NavBar';
 
 const muiTheme = getMuiTheme({
@@ -18,7 +19,8 @@ class App extends Component {
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
           <NavBar />
-          <LoginForm />
+          <Map />
+        { /* <LoginForm /> */}
         </div>
       </MuiThemeProvider>
     );

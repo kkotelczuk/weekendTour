@@ -14,7 +14,8 @@ class Map extends Component {
       checkedAtractions: false,
       checkedViewpoints: false,
       checkedMonuments: false,
-      distance: 0
+      distance: 0,
+      location: { lat: 52.2306, lng: 19.3643 }
     }
 
     this.updateCheck = this.updateCheck.bind(this);
@@ -22,18 +23,32 @@ class Map extends Component {
   }
 
   componentDidMount() {
-    new google.maps.Map(this.refs.map, {
-      zoom: 12,
-      center: {
-        lat: 52.6783,
-        lng: 22.4982
-      }
+    navigator.geolocation.getCurrentPosition((data) => {
+      this.setState(() => ({ location: { 
+        lat: data.coords.latitude, 
+        lng: data.coords.longitude 
+       }}) 
+      );
+      this.getMap(12);
+     }, () => {
+      //if user won't agree to reveal location, we will show him full map of Poland
+      //using lat and lng of central Poland hardcoded in the constructor     
+      this.getMap(7);
     });
   }
 
   //temporary function to test current functionalities
   componentDidUpdate() {
     console.log(this.state);
+  } 
+
+  getMap(zoom) {
+    const { lat, lng } = this.state.location;
+    
+    new google.maps.Map(this.refs.map, {
+      zoom,
+      center: { lat, lng }
+    });
   }
 
   handleDistanceSlider(e, value) {
@@ -60,6 +75,7 @@ class Map extends Component {
     const sliderStyle = {
       width: '150px'
     }
+    
     return (
       <div>
         <div className="options-panel">

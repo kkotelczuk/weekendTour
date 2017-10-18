@@ -11,24 +11,21 @@ jobs:
       - run:
           name: update-npm
           command: 'sudo npm install -g npm@latest'
-      - run:
-          name: install-yarn
-          command: 'sudo npm install --global yarn'
-      - run:
-          name: install-firebase
-          command: 'sudo npm install -g firebase-tools'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
+          name: install-firebase
+          command: 'sudo npm install -g firebase-tools'
+      - run:
           name: install-dependencies
-          command: 'yarn install'
+          command: 'npm install'
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
       - run:
           name: build
-          command: 'yarn build'
+          command: 'npm run build'
       - run: 
           name: deploy
           command: 'firebase deploy --token=$FIREBASE_TOKEN --non-interactive'

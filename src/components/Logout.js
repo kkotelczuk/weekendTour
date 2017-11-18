@@ -5,7 +5,7 @@ import firebase from '../firebase';
 const Logout = () => {
   const handleLogout = () => {
     firebase.auth().signOut().then(function() {
-      alert('Logout was succesfull');
+      
     }).catch(function(error) {
       console.log('something went wrong');
     });

@@ -35,8 +35,6 @@ class LoginForm extends Component {
 
   handleLogIn() {
     const { email, password } = this.state;
-    //I am not sure if I should give here front end validation,
-    //I think in case of log in should be only backend validation
 
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(() => alert("Logged in"))
@@ -55,7 +53,7 @@ class LoginForm extends Component {
 
     if (this.validate(email, password)) {
       firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then(() => alert("Thank you for signing up"))
+        .then()
         .catch(error => {
           console.log(error.code + ' ' + error.message);
       });
@@ -81,10 +79,13 @@ class LoginForm extends Component {
       });
     }
 
-    if ( password.length < 8 ) {
+    const passSpecialCharRE = /[-@!$%^&*()_+|~=`{}[\]:";'<>?,./]/;
+    const capitalsRE = /[A-Z]/;
+
+    if ( password.length < 8 || !passSpecialCharRE.test(password) || !capitalsRE.test(password) ) {
       validate = false;
       this.setState({
-        errorPassword: "Password should have at least 8 characters"
+        errorPassword: "Password should have minimum 8 characters with at least one capital letter and one special character"
       });
     } else {
       this.setState({

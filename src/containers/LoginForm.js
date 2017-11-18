@@ -14,19 +14,41 @@ class LoginForm extends Component {
       password: "",
       errorEmail: '',
       errorPassword: '',
+      touched: false,
+      serverErrorMessage: '',      
     };
 
     this.handleLogIn = this.handleLogIn.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
   }
 
-  handleChange(event) {
+  handleBlur(event) {
+    const { email, password } = this.state;
+
+    if (event.target.id === "email" && email) {
+      this.validateEmail(email);
+    } else if (event.target.id === "password" && password) {
+      this.validatePassword(password);
+    }       
+    this.setState({ touched: true });    
+  }
+
+  handleChange(event) {    
     if (event.target.id === "email") {
+      if (this.state.touched) {
+        const email = event.target.value;        
+        this.validateEmail(email);
+      }
       this.setState({
-        email: event.target.value,
+        email: event.target.value, 
       });
     } else if (event.target.id === "password") {
+      if (this.state.touched) {
+        const password = event.target.value;        
+        this.validatePassword(password);
+      }
       this.setState({
         password: event.target.value,
       });
@@ -36,36 +58,55 @@ class LoginForm extends Component {
   handleLogIn() {
     const { email, password } = this.state;
 
+    this.setState({ 
+      touched: true,
+      serverErrorMessage: '',           
+    }); 
+
+    if (!email) {
+      this.setState({
+        errorEmail: 'Please write your email'
+      });
+      return;      
+    }
+
+    if (!password) {
+      this.setState({
+        errorPassword: 'Please write your password'
+      })
+      return;
+    }
+
     firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(() => alert("Logged in"))
       .catch(error => {
-        console.log(error.code + ' ' + error.message);
-        alert("Wrong email or password");
-    });
-    this.setState({
-      email: "",
-      password: ""
-    });
+        this.setState({
+          serverErrorMessage: 'Wrong password or email'
+        })       
+      });    
   }
 
   handleSignUp() {
     const { email, password } = this.state;
 
-    if (this.validate(email, password)) {
+    this.setState({ 
+      touched: true,
+      serverErrorMessage: '',           
+    }); 
+
+    if (this.validateEmail(email) && this.validatePassword(password)) {
       firebase.auth().createUserWithEmailAndPassword(email, password)
         .then()
         .catch(error => {
-          console.log(error.code + ' ' + error.message);
-      });
-      this.setState({
-        email: "",
-        password: ""
-      });
+          this.setState({
+            serverErrorMessage: error.message
+          })  
+      });      
     }
   }
 
-  validate(email, password) {
+  validateEmail(email) {
     let validate = true;
+  
     const emailRE = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if ( !emailRE.test(email)) {
@@ -78,7 +119,12 @@ class LoginForm extends Component {
         errorEmail: ''
       });
     }
+    
+    return validate;
+  }
 
+  validatePassword(password) {
+    let validate = true;
     const passSpecialCharRE = /[-@!$%^&*()_+|~=`{}[\]:";'<>?,./]/;
     const capitalsRE = /[A-Z]/;
 
@@ -92,7 +138,6 @@ class LoginForm extends Component {
         errorPassword: ''
       });
     }
-
     return validate;
   }
 
@@ -105,10 +150,14 @@ class LoginForm extends Component {
       hight: 48,
       width: 330
     }
+    
+    let haveErrors = (this.state.errorEmail || this.state.errorPassword) ? true : false;
+
+    const errorParagraph = <p className="serverError">{this.state.serverErrorMessage}</p>;
 
     return (
       <div>
-        <p>Before move on please log in or sign up</p>
+        <p className="registerHeader">Before move on please log in or sign up</p>
         <form className="log-form">
           <TextField
             className="log-input"
@@ -119,6 +168,7 @@ class LoginForm extends Component {
             onChange={this.handleChange}
             hintText="Email"
             errorText={this.state.errorEmail}
+            onBlur={this.handleBlur}
             /><br />
           <TextField
             className="log-input"
@@ -129,11 +179,13 @@ class LoginForm extends Component {
             onChange={this.handleChange}
             hintText="Password"
             errorText={this.state.errorPassword}
+            onBlur={this.handleBlur}
             /><br />
+            {this.state.serverErrorMessage && errorParagraph}          
             <div className="buttons">
-              <RaisedButton style={buttonStyle} labelStyle = {{ textTransform: 'capitalize' }} label="Log In" primary={true} onTouchTap={this.handleLogIn}/>
-              <FlatButton style={buttonStyle} labelStyle = {{ textTransform: 'capitalize' }} label="Sign Up" primary={true} onTouchTap={this.handleSignUp}/>
-            </div>
+              <RaisedButton style={buttonStyle} labelStyle = {{ textTransform: 'capitalize' }} label="Log In" primary={true} onTouchTap={this.handleLogIn} disabled={haveErrors}/>
+              <FlatButton style={buttonStyle} labelStyle = {{ textTransform: 'capitalize' }} label="Sign Up" primary={true} onTouchTap={this.handleSignUp} disabled={haveErrors}/>
+            </div>            
         </form>
       </div>
     )

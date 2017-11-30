@@ -1,0 +1,28 @@
+.loadingWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, .9);
+    z-index: 1000000;
+}
+.loadingWrapper .loadingIndicator{
+    position: relative;
+    width: 100px;
+}
+.loadingWrapper .loadingIndicator img{
+    width: 100%
+}
+.loadingWrapper .loadingIndicator .progress{
+    position: absolute !important;
+    top: 0px;
+    left: 6px;
+    color: #F2994A;
+}
+.loadingWrapper .loadingIndicator .progress svg circle{
+    stroke: #F2994A !important;
+}

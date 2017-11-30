@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import Checkbox from 'material-ui/Checkbox';
 import Slider from 'material-ui/Slider';
-
+import LoadingIndicator from '../components/LoadingIndicator';
 import '../style/Map.css';
 
 class Map extends Component {
@@ -15,14 +15,17 @@ class Map extends Component {
       checkedViewpoints: false,
       checkedMonuments: false,
       distance: 0,
-      location: { lat: 52.2306, lng: 19.3643 }
+      location: { lat: 52.2306, lng: 19.3643 },
+      isLoading: true
     }
 
     this.updateCheck = this.updateCheck.bind(this);
     this.handleDistanceSlider = this.handleDistanceSlider.bind(this);
+    this.getMap = this.getMap.bind(this);
   }
 
   componentDidMount() {
+    
     navigator.geolocation.getCurrentPosition((data) => {
       this.setState(() => ({ location: { 
         lat: data.coords.latitude, 
@@ -45,9 +48,12 @@ class Map extends Component {
   getMap(zoom) {
     const { lat, lng } = this.state.location;
     
-    new google.maps.Map(this.refs.map, {
+    const map = new google.maps.Map(this.refs.map, {
       zoom,
       center: { lat, lng }
+    });
+    google.maps.event.addListenerOnce(map, 'idle',() => {
+      this.setState(() =>({isLoading: false}))
     });
   }
 
@@ -78,6 +84,7 @@ class Map extends Component {
     
     return (
       <div>
+       {this.state.isLoading && <LoadingIndicator />}
         <div className="options-panel">
           <Checkbox
             label="Atrakcje miejskie"

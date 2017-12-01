@@ -1,0 +1,20 @@
+.user {
+  width: 90%;
+  max-width: 680px;
+  margin: 80px auto 50px;
+}
+
+.user .account-form {
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  position: relative;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s, color 5000s ease-in-out 0s;
+    transition-delay: background-color 5000s, color 5000s;
+}

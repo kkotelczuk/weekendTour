@@ -7,6 +7,7 @@ import createHistory from 'history/createBrowserHistory';
 import LoginForm from './containers/LoginForm';
 import Map from './containers/Map';
 import NavBar from './components/NavBar';
+import User from './containers/User';
 
 import firebase from './firebase';
 
@@ -21,14 +22,14 @@ const history = createHistory();
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     console.log(`${user.email} is logged in`);
-    history.push('/map');
+    // history.push('/map');
   } else {
     history.push('/login');
     console.log('log out');
   }
 });
 
-class App extends Component {  
+class App extends Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -38,6 +39,7 @@ class App extends Component {
             <Switch>
               <Route path="/login" component={LoginForm} />
               <Route path="/map" component={Map} />
+              <Route path="/user" component={User} />
               <Route component={LoginForm} />
             </Switch>
           </div>

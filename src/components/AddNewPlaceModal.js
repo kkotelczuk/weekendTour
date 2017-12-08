@@ -73,8 +73,8 @@ class AddNewPlaceModal extends Component {
       .onSubmit(data)
   }
   handleChange(e) {
-    let location = this.state.location;
-    location[e.target.name] = e.target.value;
+    this.state.location[e.target.name] = e.target.value;
+    this.setState({location: this.state.location})
   };
   handleCoverClick(e) {
     this.handleSave(false)

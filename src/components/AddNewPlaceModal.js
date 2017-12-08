@@ -24,6 +24,9 @@ class AddNewPlaceModal extends Component {
     this.handleSubmit = this
       .handleSubmit
       .bind(this);
+    this.handleSave = this
+      .handleSave
+      .bind(this);
     this.handleChange = this
       .handleChange
       .bind(this);
@@ -52,19 +55,29 @@ class AddNewPlaceModal extends Component {
     const form = e.target;
     let validated = this.validate(form);
     if (validated) {
-      this
-        .props
-        .onSubmit(validated)
+      this.handleSave(validated)
     }
+  }
+  handleSave(data) {
+    this.setState({
+      errors: {
+        name: null,
+        lat: null,
+        lng: null,
+        desc: null,
+        website: null
+      }
+    });
+    this
+      .props
+      .onSubmit(data)
   }
   handleChange(e) {
     let location = this.state.location;
     location[e.target.name] = e.target.value;
   };
   handleCoverClick(e) {
-    this
-      .props
-      .onSubmit(false);
+    this.handleSave(false)
   };
   validate(form) {
     let errors = {};

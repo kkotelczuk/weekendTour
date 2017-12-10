@@ -1,0 +1,31 @@
+.message {
+  display: table;
+  margin: 0 auto;
+  border: 1px solid transparent;
+  font-size: 1.1em;
+  text-align: center;
+  padding: .25em 1.5em .25em .5em;
+
+  visibility: hidden;
+  opacity: 0;
+  transition: all .15s ease-out;
+  position: relative;
+}
+
+.message--shown {
+  border: 1px solid #ababab;
+
+  visibility: visible;
+  opacity: 1;
+}
+
+.message__close {
+  color: red;
+  cursor: pointer;
+  display: inline-block;
+  padding: .1em;
+
+  position: absolute;
+  right: .25em;
+  top: 3px;
+}

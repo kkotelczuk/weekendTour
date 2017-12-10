@@ -124,21 +124,22 @@ class LoginForm extends Component {
   }
 
   validatePassword(password) {
-    let validate = true;
-    const passSpecialCharRE = /[-@!$%^&*()_+|~=`{}[\]:";'<>?,./]/;
-    const capitalsRE = /[A-Z]/;
+    // let validate = true;
+    // const passSpecialCharRE = /[-@!$%^&*()_+|~=`{}[\]:";'<>?,./]/;
+    // const capitalsRE = /[A-Z]/;
 
-    if ( password.length < 8 || !passSpecialCharRE.test(password) || !capitalsRE.test(password) ) {
-      validate = false;
-      this.setState({
-        errorPassword: "Password should have minimum 8 characters with at least one capital letter and one special character"
-      });
-    } else {
-      this.setState({
-        errorPassword: ''
-      });
-    }
-    return validate;
+    // if ( password.length < 8 || !passSpecialCharRE.test(password) || !capitalsRE.test(password) ) {
+    //   validate = false;
+    //   this.setState({
+    //     errorPassword: "Password should have minimum 8 characters with at least one capital letter and one special character"
+    //   });
+    // } else {
+    //   this.setState({
+    //     errorPassword: ''
+    //   });
+    // }
+    // return validate;
+    return true;
   }
 
   render() {

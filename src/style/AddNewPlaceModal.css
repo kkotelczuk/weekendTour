@@ -1,0 +1,23 @@
+.newPlaceForm {
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+  width: 40vw;
+  min-width: 200px;
+}
+.newPlaceForm > .input{
+  width: 100% !important;
+  margin: 5px 0;
+}
+.newPlaceForm .row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+.newPlaceForm .row > .input{
+  width: calc(50% - 20px) !important;
+}
+.newPlaceForm .submitBtn{
+  margin: 20px 0 0 auto;
+}

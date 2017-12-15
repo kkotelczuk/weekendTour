@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import Checkbox from 'material-ui/Checkbox';
 import Slider from 'material-ui/Slider';
 import LoadingIndicator from '../components/LoadingIndicator';
+import AddNewPlaceModal from '../components/AddNewPlaceModal';
 import '../style/Map.css';
 
 class Map extends Component {
@@ -22,6 +23,7 @@ class Map extends Component {
     this.updateCheck = this.updateCheck.bind(this);
     this.handleDistanceSlider = this.handleDistanceSlider.bind(this);
     this.getMap = this.getMap.bind(this);
+    this.handleAddNewPlace = this.handleAddNewPlace.bind(this);
   }
 
   componentDidMount() {
@@ -55,6 +57,13 @@ class Map extends Component {
     google.maps.event.addListenerOnce(map, 'idle',() => {
       this.setState(() =>({isLoading: false}))
     });
+    google.maps.event.addListener(map, 'click', ({ga}) => this.setState({latLng: ga}));
+
+  }
+
+  handleAddNewPlace(data){
+    this.setState( {latLng: null} );
+    console.log(data)
   }
 
   handleDistanceSlider(e, value) {
@@ -85,6 +94,7 @@ class Map extends Component {
     return (
       <div>
        {this.state.isLoading && <LoadingIndicator />}
+       <AddNewPlaceModal latLng={this.state.latLng} onSubmit={this.handleAddNewPlace}></AddNewPlaceModal>
         <div className="options-panel">
           <Checkbox
             label="Atrakcje miejskie"

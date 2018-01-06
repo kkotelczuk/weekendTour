@@ -5,6 +5,7 @@ import Checkbox from 'material-ui/Checkbox';
 import Slider from 'material-ui/Slider';
 import LoadingIndicator from '../components/LoadingIndicator';
 import AddNewPlaceModal from '../components/AddNewPlaceModal';
+import MapMarker from '../components/MapMarker';
 import '../style/Map.css';
 
 class Map extends Component {
@@ -17,7 +18,10 @@ class Map extends Component {
       checkedMonuments: false,
       distance: 0,
       location: { lat: 52.2306, lng: 19.3643 },
-      isLoading: true
+      isLoading: true,
+      latLng: { x: 52.2306, y: 19.3643 },
+      map: null,
+      markers: []
     }
 
     this.updateCheck = this.updateCheck.bind(this);
@@ -44,12 +48,12 @@ class Map extends Component {
 
   //temporary function to test current functionalities
   componentDidUpdate() {
-    console.log(this.state);
+    // console.log(this.state);
   } 
 
   getMap(zoom) {
     const { lat, lng } = this.state.location;
-    
+
     const map = new google.maps.Map(this.refs.map, {
       zoom,
       center: { lat, lng }
@@ -59,11 +63,24 @@ class Map extends Component {
     });
     google.maps.event.addListener(map, 'click', ({ga}) => this.setState({latLng: ga}));
 
+		this.setState({map: map});
   }
 
   handleAddNewPlace(data){
-    this.setState( {latLng: null} );
-    console.log(data)
+    data.map = this.state.map;
+
+    data.nearbyPlaces = 5;
+
+    const Marker = new MapMarker(data);
+		Marker.create();
+
+    var markers = this.state.markers;
+    markers.push(Marker);
+
+		this.setState({
+      latLng: null,
+      markers: markers
+		});
   }
 
   handleDistanceSlider(e, value) {

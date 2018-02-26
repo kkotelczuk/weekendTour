@@ -38,12 +38,27 @@ class User extends Component {
     lastName: this._validateLastName
   };
 
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged(async (user) => {
-      if (!user) return;
-      await this.setState({ currentUser: user });
+  async componentDidMount() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if(!isLoggedIn) {
+      this.props.history.push('/login');
+    }
+
+    const user = await firebase.auth().currentUser;
+    if(user) {
+      this.setState({currentUser: user})
       this._loadUserData();
-    })
+    }
+    console.log(user)
+    
+    // firebase.auth().onAuthStateChanged((user) => {
+    //   if (!user) return;
+    //   this.setState({ 
+    //     currentUser: user,
+    //     updateEmail: user.email
+    //   });
+    //   this._loadUserData();
+    // })
   }
 
   handleClick(event) {
@@ -119,6 +134,8 @@ class User extends Component {
       float: 'right',
       clear: 'both'
     };
+
+    console.log(this.state.currentUser)
 
     return (
       <div className="user">

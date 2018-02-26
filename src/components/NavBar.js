@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 import Logo from './Logo.js';
 import Logout from './Logout.js';
@@ -13,7 +14,7 @@ const NavBar = () => {
       <Logo/>
       <div className="floater">
         <Search/>
-        <div className='avatar'><Avatar/></div>
+        <Link to="/user" className='avatar'><Avatar/></Link>
         <div className='logout'><Logout/></div>
       </div>
     </nav>

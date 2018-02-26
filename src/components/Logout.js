@@ -4,8 +4,8 @@ import firebase from '../firebase';
 
 const Logout = () => {
   const handleLogout = () => {
-    firebase.auth().signOut().then(function() {
-      
+    firebase.auth().signOut().then(() => {
+      window.localStorage.setItem('isLoggedIn', false)
     }).catch(function(error) {
       console.log('something went wrong');
     });

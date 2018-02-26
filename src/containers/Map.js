@@ -27,6 +27,10 @@ class Map extends Component {
   }
 
   componentDidMount() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if(!isLoggedIn) {
+      this.props.history.push('/login');
+    }
     
     navigator.geolocation.getCurrentPosition((data) => {
       this.setState(() => ({ location: { 

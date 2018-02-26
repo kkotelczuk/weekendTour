@@ -82,12 +82,16 @@ class LoginForm extends Component {
       isLoading: true
     })
     firebase.auth().signInWithEmailAndPassword(email, password)
+      .then((user) => {
+        window.localStorage.setItem('isLoggedIn', true)
+        this.props.history.push('/map')
+      })
       .catch(error => {
         this.setState({
           serverErrorMessage: 'Wrong password or email'
         })       
       }).then(() => this.setState({isLoading: false}));
-        
+    
   }
 
   handleSignUp() {
@@ -161,7 +165,7 @@ class LoginForm extends Component {
       hight: 48,
       width: 330
     }
-    
+
     let haveErrors = (this.state.errorEmail || this.state.errorPassword) ? true : false;
 
     const errorParagraph = <p className="serverError">{this.state.serverErrorMessage}</p>;

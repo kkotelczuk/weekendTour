@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import LoadingIndicator from '../components/LoadingIndicator';
 import '../style/LoginForm.css';
 import firebase from '../firebase';
 
@@ -14,6 +15,7 @@ class LoginForm extends Component {
       password: "",
       errorEmail: '',
       errorPassword: '',
+      isLoading: false,
       touched: false,
       serverErrorMessage: '',      
     };
@@ -76,13 +78,16 @@ class LoginForm extends Component {
       })
       return;
     }
-
+    this.setState({
+      isLoading: true
+    })
     firebase.auth().signInWithEmailAndPassword(email, password)
       .catch(error => {
         this.setState({
           serverErrorMessage: 'Wrong password or email'
         })       
-      });    
+      }).then(() => this.setState({isLoading: false}));
+        
   }
 
   handleSignUp() {
@@ -94,13 +99,18 @@ class LoginForm extends Component {
     }); 
 
     if (this.validateEmail(email) && this.validatePassword(password)) {
+      this.setState({
+        isLoading: true
+      })
       firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then()
+        .then(()=>{
+
+        })
         .catch(error => {
           this.setState({
             serverErrorMessage: error.message
           })  
-      });      
+      }).then(() => this.setState({isLoading: false}));      
     }
   }
 
@@ -158,6 +168,7 @@ class LoginForm extends Component {
 
     return (
       <div>
+        {this.state.isLoading && <LoadingIndicator />}
         <p className="registerHeader">Before move on please log in or sign up</p>
         <form className="log-form">
           <TextField
